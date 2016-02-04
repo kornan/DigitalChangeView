@@ -8,12 +8,12 @@ import android.view.View;
 
 import net.kornan.animview.beans.DataNumber;
 import net.kornan.animview.databinding.ActivityMainBinding;
+import net.kornan.view.DigitalChangeView;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     DataNumber datas;
-    DigitalChangeView rnTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,27 +23,23 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         datas = new DataNumber("" + 88, "" + 0);
         binding.setData(datas);
-
-        runAnim();
-
+        binding.textNumber.setOnEndListener(new DigitalChangeView.EndListener() {
+            @Override
+            public void onEndFinish() {
+                datas.setStartNum("" + binding.textNumber.getText(), false);
+            }
+        });
     }
 
     public void onClickView(View v) {
         switch (v.getId()) {
-            case R.id.number:
-                datas.setStartNum("90");
+            case R.id.btn_submit:
+                binding.textNumber.setNumber(Float.parseFloat(binding.editInput.getText().toString()));
+                binding.textNumber.setDuration(500);
+                binding.textNumber.start();
                 Log.i("number", datas.getStartNum());
-                rnTextView.setNumber(90.00f);
-                rnTextView.setDuration(300);
-                rnTextView.start();
                 break;
         }
     }
 
-    public void runAnim() {
-        rnTextView = (DigitalChangeView) findViewById(R.id.text_number);
-        rnTextView.setNumber(500.56f);
-        rnTextView.setDuration(300);
-        rnTextView.start();
-    }
 }
