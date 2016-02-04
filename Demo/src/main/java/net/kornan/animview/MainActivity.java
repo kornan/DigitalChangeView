@@ -11,9 +11,9 @@ import net.kornan.animview.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    TextView number;
     ActivityMainBinding binding;
     DataNumber datas;
+    DigitalChangeView rnTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         datas = new DataNumber("" + 88, "" + 0);
         binding.setData(datas);
 
+        runAnim();
+
     }
 
     public void onClickView(View v) {
@@ -31,8 +33,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.number:
                 datas.setStartNum("90");
                 Log.i("number", datas.getStartNum());
-
+                rnTextView.setNumber(90.00f);
+                rnTextView.setDuration(300);
+                rnTextView.start();
                 break;
         }
+    }
+
+    public void runAnim() {
+        rnTextView = (DigitalChangeView) findViewById(R.id.text_number);
+        rnTextView.setNumber(500.56f);
+        rnTextView.setDuration(300);
+        rnTextView.start();
     }
 }

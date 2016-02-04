@@ -25,5 +25,11 @@
             android:layout_height="wrap_content"
             android:onClick="onClickView"
             android:text="@{data.startNum}" />
+
+        <net.kornan.animview.DigitalChangeView
+            android:id="@+id/text_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 </layout>
