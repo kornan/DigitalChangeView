@@ -1,4 +1,4 @@
-package net.kornan.animview;
+package net.kornan.view;
 
 /**
  * Created by KORNAN on 2016/2/4.

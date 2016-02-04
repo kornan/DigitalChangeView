@@ -1,4 +1,4 @@
-package net.kornan.animview;
+package net.kornan.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
