@@ -21,9 +21,12 @@ public class DataNumber extends BaseObservable {
     }
 
 
-    public void setStartNum(String startNum) {
+    public void setStartNum(String startNum, boolean notify) {
         this.startNum = startNum;
-        notifyPropertyChanged(net.kornan.animview.BR.startNum);
+        if (notify) {
+            notifyPropertyChanged(net.kornan.animview.BR.startNum);
+        }
+
     }
 
     @Bindable
@@ -31,8 +34,10 @@ public class DataNumber extends BaseObservable {
         return endNum;
     }
 
-    public void setEndNum(String endNum) {
+    public void setEndNum(String endNum, boolean notify) {
         this.endNum = endNum;
-        notifyPropertyChanged(net.kornan.animview.BR.endNum);
+        if (notify) {
+            notifyPropertyChanged(net.kornan.animview.BR.endNum);
+        }
     }
 }
