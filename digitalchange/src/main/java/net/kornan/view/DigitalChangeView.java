@@ -2,15 +2,21 @@ package net.kornan.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import net.kornan.digitalchange.R;
 
 import java.text.DecimalFormat;
 
 /**
+ * 数字改变动画
  * Created by KORNAN on 2016/2/4.
  */
 public class DigitalChangeView extends TextView implements IDigitalChange {
+
+    private final static String FORMAT_FLOAT_STRING = "##0";
 
     enum NumberType {
         FLOAT, INT
@@ -30,6 +36,24 @@ public class DigitalChangeView extends TextView implements IDigitalChange {
 
     public DigitalChangeView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.DigitalChangeView);
+        fromNumber = typedArray.getFloat(R.styleable.DigitalChangeView_defaultValue, 0.00f);
+        typedArray.recycle();
+
+    }
+
+    private void setDecimalFormat(int digit) {
+        if (digit == 0) {
+            format = new DecimalFormat(FORMAT_FLOAT_STRING);
+        } else if (digit > 0) {
+            String str = FORMAT_FLOAT_STRING + ".";
+            for (int i = 0; i < digit; i++) {
+                str += "0";
+            }
+            format = new DecimalFormat(str);
+        } else {
+            format = new DecimalFormat("##0.00");
+        }
     }
 
     @Override
@@ -50,11 +74,16 @@ public class DigitalChangeView extends TextView implements IDigitalChange {
 
     }
 
+    public void setNumber(float number, int digit) {
+        this.number = number;
+        numberType = NumberType.FLOAT;
+        setDecimalFormat(digit);
+    }
+
     @Override
     public void setNumber(int number) {
         this.number = number;
         numberType = NumberType.INT;
-
     }
 
     private void runInt() {
@@ -69,8 +98,8 @@ public class DigitalChangeView extends TextView implements IDigitalChange {
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
                         setText(valueAnimator.getAnimatedValue().toString());
                         if (valueAnimator.getAnimatedFraction() >= 1) {
-                            mPlayingState = PlayingState.RUNNING;
-                            fromNumber=number;
+                            mPlayingState = PlayingState.STOPPED;
+                            fromNumber = number;
                             if (mEndListener != null)
                                 mEndListener.onEndFinish();
                         }
@@ -91,7 +120,7 @@ public class DigitalChangeView extends TextView implements IDigitalChange {
                                 .getAnimatedValue().toString())));
                         if (valueAnimator.getAnimatedFraction() >= 1) {
                             mPlayingState = PlayingState.STOPPED;
-                            fromNumber=number;
+                            fromNumber = number;
                             if (mEndListener != null)
                                 mEndListener.onEndFinish();
                         }
@@ -104,7 +133,7 @@ public class DigitalChangeView extends TextView implements IDigitalChange {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        format = new DecimalFormat("##0.00");
+        setDecimalFormat(-1);
     }
 
 

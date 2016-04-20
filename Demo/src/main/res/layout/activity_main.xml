@@ -1,61 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="data"
-            type="net.kornan.animview.beans.DataNumber" />
-    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="net.kornan.animview.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="net.kornan.animview.MainActivity">
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/edit_input"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:singleLine="true" />
 
-            <EditText
-                android:id="@+id/edit_input"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="numberDecimal"
-                android:singleLine="true" />
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_submit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:onClick="onClickView"
-                android:text="确定" />
-        </LinearLayout>
-
-        <!--<TextView-->
-        <!--android:id="@+id/number"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:onClick="onClickView"-->
-        <!--android:text="@{data.startNum}" />-->
-
-        <net.kornan.view.DigitalChangeView
-            android:id="@+id/text_number"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
             android:onClick="onClickView"
-            android:text="@{data.startNum}"
-            android:textSize="32sp" />
+            android:text="确定" />
     </LinearLayout>
-</layout>
+
+    <net.kornan.view.DigitalChangeView
+        android:id="@+id/text_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickView"
+        android:textSize="32sp"
+        app:defaultValue="100" />
+</LinearLayout>
