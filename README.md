@@ -1,12 +1,12 @@
 DigitalChangeView
 ====
-##简介:
+### 简介:
   这是一个用于实现像支付宝数字动画控件；
 
-##Gradle: 
+### Gradle: 
   compile 'net.kornan.digitalchange:digitalchange:0.0.1'
   
-##使用方法:
+### 使用方法:
 ```JAVA
   <net.kornan.view.DigitalChangeView
         android:id="@+id/text_number"
